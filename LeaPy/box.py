@@ -5,18 +5,18 @@
 # monkey number one million with a typewriter
 #
 # --------------------------------------------------------------------
-import pygame as pg
+import pygame
 
-class Box(pg.sprite.Sprite):
+class Box(pygame.sprite.Sprite):
     def __init__(self,(x,y)):
-        pg.sprite.Sprite.__init__(self)
-        self.image = pg.Surface((32,32))
+        pygame.sprite.Sprite.__init__(self)
+        self.image = pygame.Surface((32,32))
         self.rect = self.image.get_rect()
-        self.image.fill((130,130,135))
+        self.image.fill((90,190,90))
         self.set_pos(x,y)
         self.xvel = 0
         self.yvel = 0
-        self.screen = pg.display.get_surface()
+        self.screen = pygame.display.get_surface()
 
     def set_pos(self, x,y):
         self.rect.topleft = (x,y)
@@ -31,4 +31,4 @@ class Box(pg.sprite.Sprite):
         self.rect.x += self.xvel
         self.rect.y += self.yvel
         self.screen.blit(self.image, self.rect)
-        pg.display.update(self.rect)
+

@@ -16,8 +16,16 @@ class LeapMotionState(State):
     def __init__(self):
         State.__init__(self)
         self.controller.add_listener(self.listener)
+        self.canvas = pygame.Surface((1200,600))
+        self.canvas.fill((150,150,210))
+        self.canvas.convert()
+        self.canv_rect = self.canvas.get_rect()
+
+
         x = (600,300)
         self.box = Box(x)
+
+
     def check_events(self):
         if self.box.rect.x <= 0: self.box.rect.x = 0
         if self.box.rect.x >= 1200: self.box.rect.x = 1200
@@ -40,5 +48,6 @@ class LeapMotionState(State):
                 self.quit()
 
     def update_screen(self):
+        self.screen.blit(self.canvas, self.canv_rect)
         self.box.update()
         pygame.display.update()
