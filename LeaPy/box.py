@@ -7,6 +7,10 @@
 # --------------------------------------------------------------------
 import pygame
 
+def get_image(file):
+    image = pygame.image.load(file).convert()
+    return image
+
 class Box(pygame.sprite.Sprite):
     def __init__(self,(x,y)):
         pygame.sprite.Sprite.__init__(self)
@@ -26,6 +30,12 @@ class Box(pygame.sprite.Sprite):
 
     def moveY(self,s):
         self.yvel = s
+
+    def check_screen_bounds(self):
+        if self.rect.x <= 50: self.rect.x = 50
+        if self.rect.x >= 1000: self.rect.x = 1000
+        if self.rect.y <= 50: self.rect.y = 50
+        if self.rect.y >= 500: self.rect.y = 500
 
     def update(self):
         self.rect.x += self.xvel

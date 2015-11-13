@@ -32,6 +32,8 @@ class Listener(Leap.Listener):
     def on_init(self, controller):
         #print "Initialized"
         info('LeaPy initialized!')
+        self.swiped = False
+        self.swipe_direction = None
     def on_connect(self, controller):
         #print "Connected"
         info('LeaPy connected!',row=1)
@@ -57,8 +59,8 @@ class Listener(Leap.Listener):
 
         for hand in frame.hands:
             handType = "Left hand" if hand.is_left else "Right hand"
-            print "  %s, id %d, position: %s" % (
-                handType, hand.id, hand.palm_position)
+            #print "  %s, id %d, position: %s" % (
+                #handType, hand.id, hand.palm_position)
 
 
             # Get the hand's normal vector and direction
@@ -88,6 +90,10 @@ class Listener(Leap.Listener):
 
             if gesture.type == Leap.Gesture.TYPE_SWIPE:
                 swipe = SwipeGesture(gesture)
+
+                info(str(swipe.direction),6)
+                self.swiped = True
+
                 #print "  Swipe id: %d, state: %s, position: %s, direction: %s, speed: %f" % (
                 #        gesture.id, self.state_names[gesture.state],
                 #        swipe.position, swipe.direction, swipe.speed)
